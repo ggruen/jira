@@ -22,6 +22,8 @@ if [ ! -f "${_JIRA_AUTH}" ]; then
   read -s -p "Password: " jira_pass
 
   echo "{ \"username\": \"${jira_user}\", \"password\": \"${jira_pass}\" }" > $_JIRA_AUTH
+  unset jira_user
+  unset jira_pass
 fi
 chmod 600 "$_JIRA_AUTH"
 
