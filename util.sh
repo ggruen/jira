@@ -1,14 +1,14 @@
 function jira.flush() {
   # Confirm
   _jira.log "Flushing..."
-  rm -f "$credentials"
+  rm -f "$_JIRA_AUTH"
 }
 
 alias _jira.date='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 function _jira.log() {
   local msg="$@"
   echo; echo; echo $msg; echo
-  echo "[`_jira.date`] $msg" >> "$log"
+  echo "[`_jira.date`] $msg" >> "$_JIRA_LOG"
 }
 function _jira.info() {
   local msg="INFO - $@"
@@ -54,7 +54,7 @@ function _jira.to_seconds() {
   echo $time_spent
 }
 
-function quote_esc() {
+function _jira.quote() {
   local text="$@"
   echo ${text//\"/\\\"}
 }

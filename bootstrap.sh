@@ -3,27 +3,27 @@ echo
 _JIRA_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 chmod 700 "$_JIRA_DIR"
 
-endpoint="https://elcjira.atlassian.net/rest"
+_JIRA_API="https://elcjira.atlassian.net/rest"
 
-log="${_JIRA_DIR}/jira.log"
-touch "$log"
-chmod 600 "$log"
+_JIRA_LOG="${_JIRA_DIR}/jira.log"
+touch "$_JIRA_LOG"
+chmod 600 "$_JIRA_LOG"
 
-cookie_jar="${_JIRA_DIR}/.jira_cookies"
-touch "$cookie_jar"
-chmod 600 "$cookie_jar"
+_JIRA_COOKIE="${_JIRA_DIR}/.jira_cookies"
+touch "$_JIRA_COOKIE"
+chmod 600 "$_JIRA_COOKIE"
 
 # Check to see if credentials file exists
 # If it does not, then prompt for username and password
 
-credentials="${_JIRA_DIR}/.jira_credentials"
-if [ ! -f "${credentials}" ]; then
+_JIRA_AUTH="${_JIRA_DIR}/.jira_credentials"
+if [ ! -f "${_JIRA_AUTH}" ]; then
   read -p "Username: " jira_user
   read -s -p "Password: " jira_pass
 
-  echo "{ \"username\": \"${jira_user}\", \"password\": \"${jira_pass}\" }" > $credentials
+  echo "{ \"username\": \"${jira_user}\", \"password\": \"${jira_pass}\" }" > $_JIRA_AUTH
 fi
-chmod 600 "$credentials"
+chmod 600 "$_JIRA_AUTH"
 
 # Load Utility Methods
 [ -f "${_JIRA_DIR}/util.sh" ] && . ${_JIRA_DIR}/util.sh

@@ -3,7 +3,7 @@ function jira.issue_worklog.list() {
   if [ -z "${ticket}" ]; then
     read -p "Ticket: " ticket
   fi
-  curl -H "Content-Type: application/json" -b "$cookie_jar" ${endpoint}/api/2/issue/${ticket}/worklog
+  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" ${_JIRA_API}/api/2/issue/${ticket}/worklog
 }
 
 function jira.issue_worklog.get() {
@@ -11,7 +11,7 @@ function jira.issue_worklog.get() {
   if [ -z "${ticket}" ]; then
     read -p "Ticket: " ticket
   fi
-  curl -H "Content-Type: application/json" -b "$cookie_jar" ${endpoint}/api/2/issue/${ticket}/worklog/${worklog_id}
+  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" ${_JIRA_API}/api/2/issue/${ticket}/worklog/${worklog_id}
 }
 
 # @method jira.issue_worklog.create
@@ -45,7 +45,7 @@ function jira.issue_worklog.create() {
     return
   fi
 
-  curl -H "Content-Type: application/json" -b "$cookie_jar" -X POST -d "{ \"comment\": \"`quote_esc ${comment}`\", \"timeSpentSeconds\": ${time_spent} }" ${endpoint}/api/2/issue/${ticket}/worklog
+  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" -X POST -d "{ \"comment\": \"`_jira.quote ${comment}`\", \"timeSpentSeconds\": ${time_spent} }" ${_JIRA_API}/api/2/issue/${ticket}/worklog
 }
 
 function jira.issue_worklog.update() {
@@ -57,7 +57,7 @@ function jira.issue_worklog.update() {
   if [ -z "${worklog_id}" ]; then
     read -p "Worklog: " worklog_id
   fi
-  curl -H "Content-Type: application/json" -b "$cookie_jar" -X PUT -d '{ "comment": "Testing", "timeSpentSeconds": 60 }' ${endpoint}/api/2/issue/${ticket}/worklog/${worklog_id}
+  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" -X PUT -d '{ "comment": "Testing", "timeSpentSeconds": 60 }' ${_JIRA_API}/api/2/issue/${ticket}/worklog/${worklog_id}
 }
 
 function jira.issue_worklog.delete() {
@@ -69,5 +69,5 @@ function jira.issue_worklog.delete() {
   if [ -z "${worklog_id}" ]; then
     read -p "Worklog: " worklog_id
   fi
-  curl -H "Content-Type: application/json" -b "$cookie_jar" -X DELETE ${endpoint}/api/2/issue/${ticket}/worklog/${worklog_id}
+  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" -X DELETE ${_JIRA_API}/api/2/issue/${ticket}/worklog/${worklog_id}
 }
