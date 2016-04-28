@@ -1,5 +1,4 @@
-# jira
-JIRA REST API in Bash
+# JIRA REST API in Bash
 
 ## Getting Started
 
@@ -7,11 +6,13 @@ JIRA REST API in Bash
 # Clone the repo
 cd jira
 . bootstrap.sh
+# Enter JIRA Username & Password when prompted.
 ```
 
 ### Add to the end of your .bashrc or .bash_profile
 
 `[ -f /path/to/jira/bootstrap.sh ] && . /path/to/jira/bootstrap.sh`
+
 
 ### Methods
 
