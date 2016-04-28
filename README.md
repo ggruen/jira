@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-```
+```sh
 # Clone the repo
 cd jira
 . bootstrap.sh
