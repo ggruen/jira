@@ -90,7 +90,7 @@ function jira.issue_worklog.update() {
 
 function jira.issue_worklog.delete() {
   local ticket="$1"
-  local worklog_id="$1"
+  local worklog_id="$2"
   if [ -z "${ticket}" ]; then
     read -p "Ticket: " ticket
   fi
