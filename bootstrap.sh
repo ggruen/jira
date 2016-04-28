@@ -13,22 +13,12 @@ _JIRA_COOKIE="${_JIRA_DIR}/.jira_cookies"
 touch "$_JIRA_COOKIE"
 chmod 600 "$_JIRA_COOKIE"
 
-# Check to see if credentials file exists
-# If it does not, then prompt for username and password
-
 _JIRA_AUTH="${_JIRA_DIR}/.jira_credentials"
-if [ ! -f "${_JIRA_AUTH}" ]; then
-  read -p "Username: " jira_user
-  read -s -p "Password: " jira_pass
-
-  echo "{ \"username\": \"${jira_user}\", \"password\": \"${jira_pass}\" }" > $_JIRA_AUTH
-  unset jira_user
-  unset jira_pass
-fi
-chmod 600 "$_JIRA_AUTH"
 
 # Load Utility Methods
 [ -f "${_JIRA_DIR}/util.sh" ] && . ${_JIRA_DIR}/util.sh
+
+_jira.init
 
 # Load API endpoints
 # https://docs.atlassian.com/jira/REST/latest/

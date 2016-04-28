@@ -2,24 +2,44 @@ function jira.flush() {
   # Confirm
   _jira.log "Flushing..."
   rm -f "$_JIRA_AUTH"
+
+  _jira.init
+}
+
+# Check to see if credentials file exists
+# If it does not, then prompt for username and password
+function _jira.init() {
+  local jira_user=
+  local jira_pass=
+
+  if [ ! -f "${_JIRA_AUTH}" ]; then
+    read -p "Username: " jira_user
+    read -s -p "Password: " jira_pass
+
+    echo "{ \"username\": \"${jira_user}\", \"password\": \"${jira_pass}\" }" > $_JIRA_AUTH
+    unset jira_user
+    unset jira_pass
+  fi
+
+  chmod 600 "$_JIRA_AUTH"
 }
 
 alias _jira.date='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 function _jira.log() {
   local msg="$@"
-  echo; echo; echo $msg; echo
-  echo "[`_jira.date`] $msg" >> "$_JIRA_LOG"
+  echo; echo; printf "$msg"; echo
+  echo "[`_jira.date`] $msg" | sed "s,$(printf '\\\\033')\\[[0-9;]*[a-zA-Z],,g" >> "$_JIRA_LOG"
 }
 function _jira.info() {
-  local msg="INFO - $@"
+  local msg="\033[0;32mINFO\033[0m - $@"
   _jira.log "$msg"
 }
 function _jira.error() {
-  local msg="ERROR - $@"
+  local msg="\033[0;31mERROR\033[0m - $@"
   _jira.log "$msg"
 }
 function _jira.warn() {
-  local msg="WARN - $@"
+  local msg="\033[0;33mWARN\033[0m - $@"
   _jira.log "$msg"
 }
 
