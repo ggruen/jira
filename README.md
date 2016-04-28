@@ -11,10 +11,10 @@ cd jira
 
 ### Methods
 
-`jira.flush` Start over
+* `jira.flush` Start over
 
-`jira.issue_worklog.list`
-`jira.issue_worklog.get`
-`jira.issue_worklog.create` - Example: jira.issue_worklog.create PSLP-115 1.5h "Writing code."
-`jira.issue_worklog.update`
-`jira.issue_worklog.delete`
+* `jira.issue_worklog.list`
+* `jira.issue_worklog.get`
+* `jira.issue_worklog.create` - Example: jira.issue_worklog.create PSLP-115 1.5h "Writing code."
+* `jira.issue_worklog.update`
+* `jira.issue_worklog.delete`
