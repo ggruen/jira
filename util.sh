@@ -28,6 +28,10 @@ function _jira.to_seconds() {
 
   # Convert to seconds based on last character in arg
   case "${time_spent: -1}" in 
+    "w")
+      # 1 Week = 5 x 8 hour days
+      time_spent=`echo "(${time_spent%?} * 60 * 60 * 8 * 5)/1" | bc`
+      ;;
     "d")
       # 1 Day = 8 hours
       time_spent=`echo "(${time_spent%?} * 60 * 60 * 8)/1" | bc`
@@ -46,7 +50,6 @@ function _jira.to_seconds() {
       ;;
     *)
       # Throw Error
-      _jira.error "jira.issue_worklog.create - Invalid time spent: ${time_spent}"
       return
       ;;
   esac
