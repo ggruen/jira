@@ -11,7 +11,9 @@ cd jira
 
 ### Add to the end of your .bashrc or .bash_profile
 
-`[ -f /path/to/jira/bootstrap.sh ] && . /path/to/jira/bootstrap.sh`
+```sh
+[ -f /path/to/jira/bootstrap.sh ] && . /path/to/jira/bootstrap.sh
+```
 
 
 ### Methods
