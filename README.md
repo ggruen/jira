@@ -13,6 +13,8 @@ cd jira
 
 * `jira.flush` Start over
 
+#### Issue Worklog
+
 * `jira.issue_worklog.list`
 * `jira.issue_worklog.get`
 * `jira.issue_worklog.create` - Example: jira.issue_worklog.create PSLP-115 1.5h "Writing code."
