@@ -3,7 +3,7 @@
 ## Getting Started
 
 ```sh
-# Clone the repo
+git clone https://github.com/cloudily/jira.git
 cd jira
 . bootstrap.sh
 # Enter JIRA Username & Password when prompted.
