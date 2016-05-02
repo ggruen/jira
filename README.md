@@ -18,7 +18,7 @@ cd jira
 
 ### Methods
 
-* `jira.flush` Start over
+* `jira.flush` Fresh start
 
 #### Issue Worklog
 

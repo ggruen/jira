@@ -46,6 +46,13 @@ function _jira.warn() {
 function _jira.to_seconds() {
   local time_spent="$1"
 
+  # If the string contains a colon, assume the format is hh:mm
+  if [[ $time_spent == *":"* ]]; then
+    time_spent=`_jira.hm "$time_spent"`
+    echo $time_spent
+    return
+  fi
+
   # Convert to seconds based on last character in arg
   case "${time_spent: -1}" in 
     "w")
@@ -75,6 +82,19 @@ function _jira.to_seconds() {
   esac
 
   echo $time_spent
+}
+
+function _jira.formatted_time_to_seconds() {
+  # Expects the format hh:mm
+
+  local IFS=":"
+  read -ra TIME <<< "$1"
+
+  local minutes="${TIME[1]}"
+  local hours="${TIME[0]}"
+
+  local seconds=`echo "($minutes * 60) + ($hours * 60 * 60)" | bc`
+  echo $seconds
 }
 
 function _jira.quote() {
