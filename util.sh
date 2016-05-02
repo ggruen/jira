@@ -48,7 +48,7 @@ function _jira.to_seconds() {
 
   # If the string contains a colon, assume the format is hh:mm
   if [[ $time_spent == *":"* ]]; then
-    time_spent=`_jira.hm "$time_spent"`
+    time_spent=`_jira.formatted_time_to_seconds "$time_spent"`
     echo $time_spent
     return
   fi
