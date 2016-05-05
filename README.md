@@ -9,6 +9,10 @@ cd jira
 # Enter JIRA Username & Password when prompted.
 ```
 
+**To get your username**: log into JIRA in a browser, click your
+profile picture, and select Profile.  Your username is on the left side.
+The API username is *not* the same username you use to log into the web site.
+
 ### Add to the end of your .bashrc or .bash_profile
 
 ```sh
