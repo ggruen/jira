@@ -101,3 +101,8 @@ function _jira.quote() {
   local text="$@"
   echo ${text//\"/\\\"}
 }
+
+function _jira.to_iso8601_date() {
+  local datetime="`date -Is --date "$1"`"
+  echo "$datetime"
+}
