@@ -103,6 +103,12 @@ function _jira.quote() {
 }
 
 function _jira.to_iso8601_date() {
-  local datetime="`date -Is --date "$1"`"
+  local datetime="$1"
+  if [ -z "${datetime}" ]; then
+    datetime="`date`"
+  fi
+
+  # datetime="`date -Is --date "$1"`"
+  datetime="`date -u +"%Y-%m-%dT%H:%M:%SZ" --date "$datetime"`"
   echo "$datetime"
 }
