@@ -28,6 +28,7 @@ function jira.issue_worklog.create() {
   local ticket="$1"
   local time_spent="$2"
   local comment="$3"
+  local started="$4"
   if [ -z "${ticket}" ]; then
     read -p "Ticket: " ticket
   fi
@@ -37,6 +38,10 @@ function jira.issue_worklog.create() {
   if [ -z "${comment}" ]; then
     read -p "Comment: " comment
   fi
+  if [ -z "${started}" ]; then
+    read -p "Started [today]: " started
+  fi
+  started="`_jira.to_iso8601_date "${started}"`"
 
   # Convert to seconds based on last character in arg
   time_spent="`_jira.to_seconds ${time_spent}`"
@@ -51,7 +56,7 @@ function jira.issue_worklog.create() {
     return
   fi
 
-  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" -X POST -d "{ \"comment\": \"`_jira.quote ${comment}`\", \"timeSpentSeconds\": ${time_spent} }" ${_JIRA_API}/api/2/issue/${ticket}/worklog
+  curl -H "Content-Type: application/json" -b "$_JIRA_COOKIE" -X POST -d "{ \"started\": \"${started}\", \"comment\": \"`_jira.quote ${comment}`\", \"timeSpentSeconds\": ${time_spent} }" ${_JIRA_API}/api/2/issue/${ticket}/worklog
 }
 
 function jira.issue_worklog.update() {
